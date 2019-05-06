@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Group {
@@ -39,6 +40,7 @@ public class Group {
     this.name = name;
     this.users = new ArrayList<User>();
     this.admins = new ArrayList<User>();
+    this.files = new ArrayList<File>();
   }
 
   public List<User> getUsers() {
