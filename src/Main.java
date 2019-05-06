@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Main {
   public static void main(String args[]) {
@@ -19,7 +18,7 @@ public class Main {
     Group lorem = new Group("Lorem", new ArrayList<User>(Arrays.asList(adi)));
 
     // Files
-    File file = new MP4("TCR");
+    MyFile file = new MP4("TCR");
 
     // Services
     AccountService accountService = new AccountService();
@@ -36,5 +35,29 @@ public class Main {
     accountService.uploadFileToGroup(file, amet); // 9
     accountService.playFileFromGroup(file, amet); // 10
     accountService.deleteFileFromGroup(file, amet); // 11
+
+    for(String element : amet.toCsvHeader()) {
+      System.out.println(element);
+    }
+
+    for(String element : amet.toCsvRow()) {
+      System.out.println(element);
+    }
+
+    for(String element : alexandra.toCsvHeader()) {
+      System.out.println(element);
+    }
+
+    for(String element : alexandra.toCsvRow()) {
+      System.out.println(element);
+    }
+
+    for(String element : file.toCsvHeader()) {
+      System.out.println(element);
+    }
+
+    for(String element : file.toCsvRow()) {
+      System.out.println(element);
+    }
   }
 }

@@ -1,5 +1,5 @@
-public class File {
-  public File(String baseName, String extension) {
+public class MyFile {
+  public MyFile(String baseName, String extension) {
     this.baseName = baseName;
     this.extension = extension;
   }
@@ -28,5 +28,19 @@ public class File {
 //  @Override
   public void open() {
     System.out.println("Opening file");
+  }
+
+    public String[] toCsvRow() {
+    return new String[] {
+        this.getBaseName(),
+        this.getExtension(),
+    };
+  }
+
+  public String[] toCsvHeader() {
+    return new String[] {
+        "Base name",
+        "Extension",
+    };
   }
 }

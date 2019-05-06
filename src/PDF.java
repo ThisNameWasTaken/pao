@@ -1,4 +1,4 @@
-public class PDF extends File{
+public class PDF extends MyFile {
   PDF(String name) {
     super(name, "PDF");
   }

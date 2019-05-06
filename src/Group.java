@@ -1,18 +1,17 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Group {
   private List<User> users;
   private List<User> admins;
   private String name;
-  private List<File> files;
+  private List<MyFile> files;
 
-  public void uploadFile(File file) {
+  public void uploadFile(MyFile file) {
     this.files.add(file);
   }
 
-  public void removeFile(File file) {
+  public void removeFile(MyFile file) {
     this.files.remove(file);
   }
 
@@ -40,7 +39,7 @@ public class Group {
     this.name = name;
     this.users = new ArrayList<User>();
     this.admins = new ArrayList<User>();
-    this.files = new ArrayList<File>();
+    this.files = new ArrayList<MyFile>();
   }
 
   public List<User> getUsers() {
@@ -82,5 +81,33 @@ public class Group {
   @Override
   public String toString() {
     return "'" + this.getName() + "'";
+  }
+
+  public String[] toCsvRow() {
+    String userNamesString = new String();
+
+    for(User user : this.users) {
+      userNamesString += (user.getName() + ',');
+    }
+
+    String fileNamesString = new String();
+
+    for(MyFile file : this.files) {
+      fileNamesString += (file.getName() + ',');
+    }
+
+    return new String[] {
+        this.getName(),
+        userNamesString,
+        fileNamesString
+    };
+  }
+
+  public String[] toCsvHeader() {
+    return new String[] {
+        "Group Name",
+        "Users",
+        "Files",
+    };
   }
 }
