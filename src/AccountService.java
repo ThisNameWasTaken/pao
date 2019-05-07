@@ -117,9 +117,15 @@ public class AccountService {
     try (PrintWriter writer = new PrintWriter(new File(filePath))) {
 
       StringBuilder stringBuilder = new StringBuilder();
+
       for(String element : header) {
         stringBuilder.append(element);
         stringBuilder.append(',');
+      }
+      if(stringBuilder.length() > 0) {
+        if (stringBuilder.charAt(stringBuilder.length() - 1) == ',') {
+          stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        }
       }
       stringBuilder.append('\n');
 
@@ -127,6 +133,11 @@ public class AccountService {
         for(String element : row) {
           stringBuilder.append(element);
           stringBuilder.append(',');
+        }
+        if(stringBuilder.length() > 0) {
+          if (stringBuilder.charAt(stringBuilder.length() - 1) == ',') {
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+          }
         }
         stringBuilder.append('\n');
       }
@@ -137,26 +148,69 @@ public class AccountService {
     }
   }
 
-  public void loadFromCsv(String filePath) {
-    ArrayList<User> users = new ArrayList<User>();
+  public ArrayList<Group> loadGroupsFromCsv(String filePath) {
+    ArrayList<Group> groups = new ArrayList<Group>();
+
     try {
       Scanner scanner = new Scanner(new File(filePath));
 
-      while(scanner.hasNext()) {
-        String[] properties = scanner.next().split(",");
-        String userName = properties[0];
-        String[] groupNames = properties[1].split(";");
-        ArrayList<Group> userGroups = new ArrayList<Group>();
-        for(String groupName : groupNames) {
-          userGroups.add(new Group(groupName));
-        }
-        users.add(new User(userName));
+//    Skip the header
+      if(scanner.hasNextLine()) {
+        scanner.nextLine();
       }
+
+      while(scanner.hasNextLine()) {
+        String[] properties = scanner.nextLine().split(",");
+//        System.out.println("properties: ");
+//        for(String property : properties) {
+//          System.out.println(property);
+//        }
+
+//        System.out.println("Group name:");
+        String groupName = properties[0];
+//        System.out.println(groupName);
+
+        String[] groupAdminNames = properties[1].split(";");
+        ArrayList<User> admins = new ArrayList<User>();
+
+//        System.out.println("Admins:");
+        for(String adminName : groupAdminNames ) {
+//          System.out.println(adminName);
+          admins.add(new User(adminName));
+        }
+
+        String[] groupUserNames = properties[2].split(";");
+        ArrayList<User> users = new ArrayList<User>();
+
+//        System.out.println("Users: ");
+        for(String userName : groupUserNames ) {
+//          System.out.println(userName);
+          users.add(new User(userName));
+        }
+
+        String[] groupFileNames = properties[3].split(";");
+        ArrayList<MyFile> files = new ArrayList<MyFile>();
+
+//        System.out.println("Files: ");
+        for(String fileName : groupFileNames ) {
+//          System.out.println(fileName);
+          String[] splits = fileName.split("\\.");
+//          System.out.print(" FileName: " + splits[0] + " extension: " + "\n");
+          files.add(new MyFile(splits[0], splits[1]));
+        }
+
+//        System.out.println("Group added");
+        groups.add(new Group(groupName, admins, users, files));
+      }
+
+      System.out.println(groups.toString());
 
       scanner.close();
     } catch (Exception e) {
       System.out.println(e.getMessage());;
     }
+
+    return groups;
   }
 
 
