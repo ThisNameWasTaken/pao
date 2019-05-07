@@ -90,6 +90,11 @@ public class Group {
       userNamesString += (user.getName() + ';');
     }
 
+    String adminNamesString = new String();
+    for(User admin: this.admins) {
+      adminNamesString += (admin.getName() + ';');
+    }
+
     String fileNamesString = new String();
 
     for(MyFile file : this.files) {
@@ -99,6 +104,7 @@ public class Group {
     return new String[] {
         this.getName(),
         userNamesString,
+        adminNamesString,
         fileNamesString
     };
   }
@@ -107,6 +113,7 @@ public class Group {
     return new String[] {
         "Group Name",
         "Users",
+        "Admins",
         "Files",
     };
   }
