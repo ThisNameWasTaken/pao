@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
   public static void main(String args[]) {
@@ -27,14 +28,14 @@ public class Main {
     accountService.logInUser(adi); // 1
     Group amet = accountService.createGroup(new Group("Amet")); // 2
     accountService.joinGroup(testGroup); // 3
-    accountService.leaveGroup(ipsum); // 4
+//    accountService.leaveGroup(ipsum); // 4
     accountService.addAdminToGroup(alexandra, amet); // 5
-    accountService.removeAdminToGroup(alexandra, amet); // 6
+//    accountService.removeAdminToGroup(alexandra, amet); // 6
     accountService.addUserToGroup(mihai, amet); // 7
-    accountService.kickUserFromGroup(mihai, amet); // 8
+//    accountService.kickUserFromGroup(mihai, amet); // 8
     accountService.uploadFileToGroup(file, amet); // 9
     accountService.playFileFromGroup(file, amet); // 10
-    accountService.deleteFileFromGroup(file, amet); // 11
+//    accountService.deleteFileFromGroup(file, amet); // 11
 
     for(String element : amet.toCsvHeader()) {
       System.out.println(element);
@@ -59,5 +60,9 @@ public class Main {
     for(String element : file.toCsvRow()) {
       System.out.println(element);
     }
+
+    accountService.writeToCsv("test.csv", adi.toCsvHeader(), new List<String[]>(
+        Arrays.asList(adi.toCsvRow())
+    );
   }
 }

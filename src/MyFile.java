@@ -37,7 +37,7 @@ public class MyFile {
     };
   }
 
-  public String[] toCsvHeader() {
+  public static String[] getCsvHeader() {
     return new String[] {
         "Base name",
         "Extension",

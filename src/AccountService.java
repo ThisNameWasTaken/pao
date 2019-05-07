@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
 public class AccountService {
   private User user;
 
@@ -75,7 +81,7 @@ public class AccountService {
     System.out.println("");
   }
 
-  public void uploadFileToGroup(File file, Group group) { // 6
+  public void uploadFileToGroup(MyFile file, Group group) { // 6
     if(!group.isMember(this.user)) {
       System.out.println(this.user.getName() + " is not a member of " + group.getName());
       return;
@@ -85,7 +91,7 @@ public class AccountService {
     System.out.println("");
   }
 
-  public void deleteFileFromGroup(File file, Group group) { // 7
+  public void deleteFileFromGroup(MyFile file, Group group) { // 7
     if(!group.isMember(this.user)) {
       System.out.println(this.user.getName() + " is not a member of " + group.getName());
       return;
@@ -95,12 +101,37 @@ public class AccountService {
     System.out.println("");
   }
 
-  public void playFileFromGroup(File file, Group group) { // 8
+  public void playFileFromGroup(MyFile file, Group group) { // 8
     if(!group.isMember(this.user)) {
       System.out.println(this.user.getName() + " is not a member of " + group.getName());
       return;
     }
 
     file.open();
+  }
+
+  public void writeToCsv(String filePath, String[] header, List<String[]> rows) {
+    try (PrintWriter writer = new PrintWriter(new File("test.csv"))) {
+
+      StringBuilder stringBuilder = new StringBuilder();
+      for(String element : header) {
+        stringBuilder.append(element);
+        stringBuilder.append(',');
+      }
+      stringBuilder.append('\n');
+
+      for(String[] row : rows) {
+        for(String element : row) {
+          stringBuilder.append(element);
+          stringBuilder.append(',');
+        }
+        stringBuilder.append('\n');
+      }
+
+      writer.write(stringBuilder.toString());
+
+    } catch (FileNotFoundException e) {
+      System.out.println(e.getMessage());
+    }
   }
 }

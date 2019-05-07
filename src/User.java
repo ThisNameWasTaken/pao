@@ -47,4 +47,24 @@ public class User {
         "}";
   }
 
+
+  public String[] toCsvRow() {
+    String groupNamesString = new String();
+
+    for(Group group : this.groups) {
+      groupNamesString += (group.getName() + ';');
+    }
+
+    return new String[] {
+        this.getName(),
+        groupNamesString,
+    };
+  }
+
+  public static String[] getCsvHeader() {
+    return new String[] {
+        "Name",
+        "Groups",
+    };
+  }
 }

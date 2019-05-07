@@ -87,13 +87,13 @@ public class Group {
     String userNamesString = new String();
 
     for(User user : this.users) {
-      userNamesString += (user.getName() + ',');
+      userNamesString += (user.getName() + ';');
     }
 
     String fileNamesString = new String();
 
     for(MyFile file : this.files) {
-      fileNamesString += (file.getName() + ',');
+      fileNamesString += (file.getName() + ';');
     }
 
     return new String[] {
@@ -103,7 +103,7 @@ public class Group {
     };
   }
 
-  public String[] toCsvHeader() {
+  public static String[] getCsvHeader() {
     return new String[] {
         "Group Name",
         "Users",
