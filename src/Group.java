@@ -15,6 +15,12 @@ public class Group {
     this.files.remove(file);
   }
 
+  public Group(String name, List<User> admins, List<User> users, List<MyFile> files) {
+    this(name, admins, users);
+
+    this.files = files;
+  }
+
   public Group(String name, List<User> admins, List<User> users) {
     this(name, admins);
 
@@ -84,28 +90,36 @@ public class Group {
   }
 
   public String[] toCsvRow() {
-    String userNamesString = new String();
+    StringBuilder userNamesStringBuilder = new StringBuilder();
 
     for(User user : this.users) {
-      userNamesString += (user.getName() + ';');
+      userNamesStringBuilder.append(user.getName() + ';');
+    }
+    if(userNamesStringBuilder.length() > 0) {
+      userNamesStringBuilder.deleteCharAt(userNamesStringBuilder.length() - 1);
     }
 
-    String adminNamesString = new String();
+    StringBuilder adminNamesStringBuilder = new StringBuilder();
     for(User admin: this.admins) {
-      adminNamesString += (admin.getName() + ';');
+      adminNamesStringBuilder.append(admin.getName() + ';');
+    }
+    if(adminNamesStringBuilder.length() > 0) {
+      adminNamesStringBuilder.deleteCharAt(adminNamesStringBuilder.length() - 1);
     }
 
-    String fileNamesString = new String();
-
+    StringBuilder fileNamesStringBuilder = new StringBuilder();
     for(MyFile file : this.files) {
-      fileNamesString += (file.getName() + ';');
+      fileNamesStringBuilder.append(file.getName() + ';');
+    }
+    if(fileNamesStringBuilder.length() > 0) {
+      fileNamesStringBuilder.deleteCharAt(fileNamesStringBuilder.length() - 1);
     }
 
     return new String[] {
         this.getName(),
-        userNamesString,
-        adminNamesString,
-        fileNamesString
+        userNamesStringBuilder.toString(),
+        adminNamesStringBuilder.toString(),
+        fileNamesStringBuilder.toString()
     };
   }
 
