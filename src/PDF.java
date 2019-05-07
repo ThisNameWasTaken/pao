@@ -1,10 +1,10 @@
 public class PDF extends MyFile {
   PDF(String name) {
-    super(name, "PDF");
+    super(name, "pdf");
   }
 
   @Override
   public void open() {
-    System.out.println("Opening PDF");
+    System.out.println("Opening pdf");
   }
 }
