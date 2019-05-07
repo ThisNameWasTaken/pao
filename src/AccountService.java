@@ -1,8 +1,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class AccountService {
   private User user;
@@ -66,6 +68,7 @@ public class AccountService {
   }
 
   public void addAdminToGroup(User admin, Group group) { // 9
+    group.removeUser(admin);
     group.addAdmin(admin);
 
     System.out.println(admin.getName() + " was promoted to admin by " + this.user.getName());
@@ -111,7 +114,7 @@ public class AccountService {
   }
 
   public void writeToCsv(String filePath, String[] header, List<String[]> rows) {
-    try (PrintWriter writer = new PrintWriter(new File("test.csv"))) {
+    try (PrintWriter writer = new PrintWriter(new File(filePath))) {
 
       StringBuilder stringBuilder = new StringBuilder();
       for(String element : header) {
@@ -129,9 +132,32 @@ public class AccountService {
       }
 
       writer.write(stringBuilder.toString());
-
     } catch (FileNotFoundException e) {
       System.out.println(e.getMessage());
     }
   }
+
+  public void loadFromCsv(String filePath) {
+    ArrayList<User> users = new ArrayList<User>();
+    try {
+      Scanner scanner = new Scanner(new File(filePath));
+
+      while(scanner.hasNext()) {
+        String[] properties = scanner.next().split(",");
+        String userName = properties[0];
+        String[] groupNames = properties[1].split(";");
+        ArrayList<Group> userGroups = new ArrayList<Group>();
+        for(String groupName : groupNames) {
+          userGroups.add(new Group(groupName));
+        }
+        users.add(new User(userName));
+      }
+
+      scanner.close();
+    } catch (Exception e) {
+      System.out.println(e.getMessage());;
+    }
+  }
+
+
 }
