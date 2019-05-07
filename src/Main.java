@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Main {
   public static void main(String args[]) {
@@ -37,7 +36,7 @@ public class Main {
     accountService.playFileFromGroup(file, amet); // 10
 //    accountService.deleteFileFromGroup(file, amet); // 11
 
-    for(String element : amet.toCsvHeader()) {
+    for(String element : amet.getCsvHeader()) {
       System.out.println(element);
     }
 
@@ -45,7 +44,7 @@ public class Main {
       System.out.println(element);
     }
 
-    for(String element : alexandra.toCsvHeader()) {
+    for(String element : alexandra.getCsvHeader()) {
       System.out.println(element);
     }
 
@@ -53,7 +52,7 @@ public class Main {
       System.out.println(element);
     }
 
-    for(String element : file.toCsvHeader()) {
+    for(String element : file.getCsvHeader()) {
       System.out.println(element);
     }
 
@@ -61,8 +60,35 @@ public class Main {
       System.out.println(element);
     }
 
-    accountService.writeToCsv("test.csv", adi.toCsvHeader(), new List<String[]>(
-        Arrays.asList(adi.toCsvRow())
+    accountService.writeToCsv(
+      "users-1.csv",
+      User.getCsvHeader(),
+      new ArrayList<String[]>(){{
+        add(adi.toCsvRow());
+        add(mihai.toCsvRow());
+        add(alexandra.toCsvRow());
+      }}
+    );
+
+    accountService.writeToCsv(
+        "groups-1.csv",
+        Group.getCsvHeader(),
+        new ArrayList<String[]>(){{
+          add(lorem.toCsvRow());
+          add(ipsum.toCsvRow());
+          add(dolor.toCsvRow());
+          add(sit.toCsvRow());
+          add(amet.toCsvRow());
+          add(testGroup.toCsvRow());
+        }}
+    );
+
+    accountService.writeToCsv(
+        "files-1.csv",
+        MyFile.getCsvHeader(),
+        new ArrayList<String[]>(){{
+          add(file.toCsvRow());
+        }}
     );
   }
 }
