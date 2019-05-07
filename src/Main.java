@@ -90,5 +90,7 @@ public class Main {
           add(file.toCsvRow());
         }}
     );
+
+    accountService.loadFromCsv("users-1.csv");
   }
 }
