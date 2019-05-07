@@ -122,11 +122,13 @@ public class AccountService {
         stringBuilder.append(element);
         stringBuilder.append(',');
       }
+
       if(stringBuilder.length() > 0) {
         if (stringBuilder.charAt(stringBuilder.length() - 1) == ',') {
           stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         }
       }
+
       stringBuilder.append('\n');
 
       for(String[] row : rows) {
@@ -134,11 +136,13 @@ public class AccountService {
           stringBuilder.append(element);
           stringBuilder.append(',');
         }
+        
         if(stringBuilder.length() > 0) {
           if (stringBuilder.charAt(stringBuilder.length() - 1) == ',') {
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);
           }
         }
+
         stringBuilder.append('\n');
       }
 
@@ -161,45 +165,31 @@ public class AccountService {
 
       while(scanner.hasNextLine()) {
         String[] properties = scanner.nextLine().split(",");
-//        System.out.println("properties: ");
-//        for(String property : properties) {
-//          System.out.println(property);
-//        }
 
-//        System.out.println("Group name:");
         String groupName = properties[0];
-//        System.out.println(groupName);
 
         String[] groupAdminNames = properties[1].split(";");
         ArrayList<User> admins = new ArrayList<User>();
 
-//        System.out.println("Admins:");
         for(String adminName : groupAdminNames ) {
-//          System.out.println(adminName);
           admins.add(new User(adminName));
         }
 
         String[] groupUserNames = properties[2].split(";");
         ArrayList<User> users = new ArrayList<User>();
 
-//        System.out.println("Users: ");
         for(String userName : groupUserNames ) {
-//          System.out.println(userName);
           users.add(new User(userName));
         }
 
         String[] groupFileNames = properties[3].split(";");
         ArrayList<MyFile> files = new ArrayList<MyFile>();
 
-//        System.out.println("Files: ");
         for(String fileName : groupFileNames ) {
-//          System.out.println(fileName);
           String[] splits = fileName.split("\\.");
-//          System.out.print(" FileName: " + splits[0] + " extension: " + "\n");
           files.add(new MyFile(splits[0], splits[1]));
         }
 
-//        System.out.println("Group added");
         groups.add(new Group(groupName, admins, users, files));
       }
 
@@ -212,6 +202,4 @@ public class AccountService {
 
     return groups;
   }
-
-
 }
