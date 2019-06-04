@@ -1,3 +1,5 @@
+package Classes;
+
 public class PDF extends MyFile {
   PDF(String name) {
     super(name, "pdf");

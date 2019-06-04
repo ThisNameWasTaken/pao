@@ -1,3 +1,5 @@
+package Classes;
+
 public class MP4 extends MyFile {
   MP4(String name) {
     super(name, "mp4");

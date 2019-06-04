@@ -1,3 +1,7 @@
+package Classes;
+
+import Classes.Group;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +31,7 @@ public class User {
     return groups;
   }
 
-//  public void setGroups(List<Group> groups) {
+//  public void setGroups(List<Classes.Group> groups) {
 //    this.groups = groups;
 //  }
 

@@ -1,5 +1,10 @@
+import Classes.Group;
+import Classes.MyFile;
+import Classes.PDF;
+import Classes.User;
+import Services.AccountService;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Main {
   public static void main(String args[]) {
@@ -11,7 +16,7 @@ public class Main {
 
     accountService.logInUser(razvan);
     accountService.joinGroup(csvGroups.get(1));
-    accountService.uploadFileToGroup(new PDF("lorem"), csvGroups.get(1));
+    accountService.uploadFileToGroup(new MyFile("ipsum", "txt"), csvGroups.get(1));
 
     ArrayList<String[]> groupsCsvRows = new ArrayList<String[]>();
 

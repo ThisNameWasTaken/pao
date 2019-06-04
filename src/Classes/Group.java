@@ -1,3 +1,5 @@
+package Classes;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -125,7 +127,7 @@ public class Group {
 
   public static String[] getCsvHeader() {
     return new String[] {
-        "Group Name",
+        "Classes.Group Name",
         "Users",
         "Admins",
         "Files",

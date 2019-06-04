@@ -1,3 +1,5 @@
+package Classes;
+
 public class MyFile {
   public MyFile(String baseName, String extension) {
     this.baseName = baseName;
